@@ -1,5 +1,6 @@
 package com.example.obr;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,9 @@ public class MainActivity extends FlutterActivity {
         super.onCreate(savedInstanceState);
         deviceEngine = ((BaseApp) getApplication()).deviceEngine;
         printer = deviceEngine.getPrinter();
+        printer.setTypeface(Typeface.DEFAULT);
+         System.out.println("my printer");
+          System.out.println(printer);
     }
 
     @Override
@@ -35,6 +39,7 @@ public class MainActivity extends FlutterActivity {
                 .setMethodCallHandler(
                         (call, result) -> {
                             if(Objects.equals(call.method, "printing")){
+                                System.out.println(printer);
                                 printer.initPrinter();
                                 printer.appendPrnStr(
                                         "** morisho ** \n",
@@ -53,7 +58,7 @@ public class MainActivity extends FlutterActivity {
                                         });
                                     }
                                 });
-                                result.success("morisho noma");
+                                result.success(deviceEngine.getDeviceInfo().getSn());
                             }
                         }
                 );

@@ -52,8 +52,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   final MethodChannel nexgoObr = const MethodChannel("flutter.native/nexgo");
 
-  void _incrementCounter() {
-    nexgoObr.invokeMethod("printing").then((value) {
+  void _incrementCounter() async {
+    await nexgoObr.invokeMethod("printing").then((value) {
       print("value gotten is $value");
     });
   }
